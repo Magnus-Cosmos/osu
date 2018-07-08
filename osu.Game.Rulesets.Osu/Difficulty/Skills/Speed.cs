@@ -13,7 +13,6 @@ namespace osu.Game.Rulesets.Osu.Difficulty.Skills
         protected override double SkillMultiplier => 1400;
         protected override double StrainDecayBase => 0.3;
 
-        private const double spaced_spacing_threshold = 150;
         private const double single_spacing_threshold = 125;
         private const double stream_spacing_threshold = 110;
         private const double almost_diameter = 90;
@@ -31,19 +30,14 @@ namespace osu.Game.Rulesets.Osu.Difficulty.Skills
                 speedBonus = 0;
 
             double speedValue;
-            if (distance > spaced_spacing_threshold)
+            if (distance > single_spacing_threshold)
             {
-                speedValue = 2.4 + (distance - spaced_spacing_threshold) / 90;
-                speedValue *= (1.0 + 1.5 * speedBonus);
-            }
-            else if (distance > single_spacing_threshold)
-            {
-                speedValue = 2.1 + 0.3 * (distance - single_spacing_threshold) / (spaced_spacing_threshold - single_spacing_threshold);
+                speedValue = 2.5;
                 speedValue *= (1.0 + 1.2 * speedBonus);
             }
             else if (distance > stream_spacing_threshold)
             {
-                speedValue = 1.6 + 0.5 * (distance - stream_spacing_threshold) / (single_spacing_threshold - stream_spacing_threshold);
+                speedValue = 1.6 + 0.9 * (distance - stream_spacing_threshold) / (single_spacing_threshold - stream_spacing_threshold);
                 speedValue *= (1.0 + speedBonus);
             }
             else if (distance > almost_diameter)
